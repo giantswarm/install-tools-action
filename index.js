@@ -3,13 +3,10 @@ const github = require('@actions/github');
 const tc = require('@actions/tool-cache');
 
 try {
-  const semverP = await core.group('Install semver', async () => {
-    const semverVersion = core.getInput('semver');
-    const semverDonwloadURL = `https://github.com/fsaintjacques/semver-tool/archive/${semverVersion}.tar.gz`
-    installTool('semver', semverVersion, semverDonwloadURL)
-  })
-
-  await semverP
+  core.info('Install semver')
+  const semverVersion = core.getInput('semver');
+  const semverDonwloadURL = `https://github.com/fsaintjacques/semver-tool/archive/${semverVersion}.tar.gz`
+  installTool('semver', semverVersion, semverDonwloadURL)
 } catch (error) {
   core.setFailed(error.message);
 }
