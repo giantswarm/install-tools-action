@@ -1,13 +1,11 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Install Tools'
+description: 'Install & cache common scripts and binaries.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we we greeted you'
+  semver:
+    description: 'fsaintjacques/semver-tool version'
+    required: false
+    default: '3.0.0'
+outputs: {}
 runs:
   using: 'node12'
   main: 'index.js'
