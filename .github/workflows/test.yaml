@@ -13,10 +13,3 @@ jobs:
         uses: actions/checkout@v2
       - name: Run this action
         uses: ./
-      - name: Check binaries
-        run: |
-          echo -n "architect: "
-          architect version
-
-          echo -n "semver: "
-          semver --version
