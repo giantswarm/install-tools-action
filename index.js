@@ -26,7 +26,7 @@ async function installTool(name, version, url) {
     const path = await tc.downloadTool(url);
 
     await exec.exec(`mkdir ${name}`)
-    await exec.exec(`tar -C ${name} -xzvf ${path} --strip-components 1 --wildcards */${name}`)
+    await exec.exec(`tar -C ${name} -xzvf ${path} --strip-components 2 --wildcards */src/${name}`)
 
     cachedPath = await tc.cacheDir(name, name, version);
     core.addPath(cachedPath)
