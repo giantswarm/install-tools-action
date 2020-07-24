@@ -7,7 +7,7 @@ async function run() {
   try {
     let p1 = core.group('Install architect', async () => {
       const version = core.getInput('architect');
-      const url = `https://github.com/giantswarm/architect/releases/download/v${architectVersion}/architect-v${architectVersion}-linux-amd64.tar.gz`
+      const url = `https://github.com/giantswarm/architect/releases/download/v${version}/architect-v${version}-linux-amd64.tar.gz`
       await installTool('architect', version, url, 1, '*/architect')
     })
 
