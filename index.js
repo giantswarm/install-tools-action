@@ -1,4 +1,5 @@
 const core = require('@actions/core');
+const glob = require('@actions/glob');
 const tc = require('@actions/tool-cache');
 
 async function run() {
@@ -19,10 +20,15 @@ async function installTool(name, version, url) {
     return
   }
 
+
   const path = await tc.downloadTool(url);
-  const dir = await tc.extractTar(path, 'semver/');
+  const dir = await tc.extractTar(path, name + '/');
   cachedPath = await tc.cacheDir(dir, name, version);
   core.addPath(cachedPath)
+
+  const globber = await glob.create('**/' + name)
+  const files = await globber.glob()
+  core.info('Files: ' + files)
 }
 
 run();
