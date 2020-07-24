@@ -2,13 +2,15 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const tc = require('@actions/tool-cache');
 
-try {
-  core.info('Install semver')
-  const semverVersion = core.getInput('semver');
-  const semverDonwloadURL = `https://github.com/fsaintjacques/semver-tool/archive/${semverVersion}.tar.gz`
-  installTool('semver', semverVersion, semverDonwloadURL)
-} catch (error) {
-  core.setFailed(error.message);
+async function run() {
+  try {
+    core.info('Install semver')
+    const semverVersion = core.getInput('semver');
+    const semverDonwloadURL = `https://github.com/fsaintjacques/semver-tool/archive/${semverVersion}.tar.gz`
+    installTool('semver', semverVersion, semverDonwloadURL)
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
 
 function installTool(name, version, url) {
@@ -23,3 +25,5 @@ function installTool(name, version, url) {
   cachedPath = await tc.cacheDir(dir, name, version);
   core.addPath(cachedPath)
 }
+
+run();
