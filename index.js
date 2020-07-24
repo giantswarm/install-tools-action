@@ -5,16 +5,20 @@ const tc = require('@actions/tool-cache');
 
 async function run() {
   try {
-    core.group('Install architect', async () => {
-      const architectVersion = core.getInput('architect');
-      const architectDownloadURL = `https://github.com/giantswarm/architect/releases/download/v${architectVersion}/architect-v${architectVersion}-linux-amd64.tar.gz`
-      await installTool('architect', architectVersion, architectDownloadURL, 1, '*/architect')
+    let p1 = core.group('Install architect', async () => {
+      const version = core.getInput('architect');
+      const url = `https://github.com/giantswarm/architect/releases/download/v${architectVersion}/architect-v${architectVersion}-linux-amd64.tar.gz`
+      await installTool('architect', version, url, 1, '*/architect')
     })
 
-    core.info('Install semver')
-    const semverVersion = core.getInput('semver');
-    const semverDonwloadURL = `https://github.com/fsaintjacques/semver-tool/archive/${semverVersion}.tar.gz`
-    await installTool('semver', semverVersion, semverDonwloadURL, 2, '*/src/semver')
+    let p2 = core.group('Install semver', async () => {
+        const semverVersion = core.getInput('semver');
+        const semverDonwloadURL = `https://github.com/fsaintjacques/semver-tool/archive/${semverVersion}.tar.gz`
+        await installTool('semver', semverVersion, semverDonwloadURL, 2, '*/src/semver')
+    })
+
+    await p1
+    await p2
   } catch (error) {
     core.setFailed(error.message);
   }
