@@ -13,7 +13,7 @@ async function run() {
   }
 }
 
-function installTool(name, version, url) {
+async function installTool(name, version, url) {
   var cachedPath = tc.find(name, version)
   if (cachedPath) {
     core.addPath(cachedPath)
