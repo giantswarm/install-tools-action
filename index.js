@@ -1,4 +1,5 @@
 const core = require('@actions/core');
+const exec = require('@actions/exec');
 const glob = require('@actions/glob');
 const tc = require('@actions/tool-cache');
 
@@ -22,13 +23,12 @@ async function installTool(name, version, url) {
 
 
   const path = await tc.downloadTool(url);
-  const dir = await tc.extractTar(path, name + '/');
-  cachedPath = await tc.cacheDir(dir, name, version);
-  core.addPath(cachedPath)
 
-  const globber = await glob.create('**/' + name)
-  const files = await globber.glob()
-  core.info('Files: ' + files)
+  await exec.exec(`mkdir ${name}'`)
+  await exec.exec(`tar -C ${name} -xzvf ${path} --strip-components 1 --wildcards '*/${name}'`)
+
+  cachedPath = await tc.cacheDir(name, name, version);
+  core.addPath(cachedPath)
 }
 
 run();
