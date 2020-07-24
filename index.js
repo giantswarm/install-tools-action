@@ -20,7 +20,7 @@ async function installTool(name, version, url) {
     return
   }
 
-  const path = await tc.downloadTool(semverDonwloadURL);
+  const path = await tc.downloadTool(url);
   const dir = await tc.extractTar(path, 'semver/');
   cachedPath = await tc.cacheDir(dir, name, version);
   core.addPath(cachedPath)
