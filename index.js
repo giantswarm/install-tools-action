@@ -15,20 +15,24 @@ async function run() {
 }
 
 async function installTool(name, version, url) {
-  var cachedPath = tc.find(name, version)
-  if (cachedPath) {
+  try {
+    var cachedPath = tc.find(name, version)
+    if (cachedPath) {
+        core.addPath(cachedPath)
+        return
+    }
+
+
+    const path = await tc.downloadTool(url);
+
+    await exec.exec(`mkdir ${name}`)
+    await exec.exec(`tar -C ${name} -xzvf ${path} --strip-components 1 --wildcards */${name}`)
+
+    cachedPath = await tc.cacheDir(name, name, version);
     core.addPath(cachedPath)
-    return
+  } catch (error) {
+    core.setFailed(error.message);
   }
-
-
-  const path = await tc.downloadTool(url);
-
-  await exec.exec(`mkdir ${name}`)
-  await exec.exec(`tar -C ${name} -xzvf ${path} --strip-components 1 --wildcards */${name}`)
-
-  cachedPath = await tc.cacheDir(name, name, version);
-  core.addPath(cachedPath)
 }
 
 run();
