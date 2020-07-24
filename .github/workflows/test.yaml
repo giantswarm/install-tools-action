@@ -17,5 +17,3 @@ jobs:
         run: |
           echo -n "semver: "
           semver --version
-    steps:
-
