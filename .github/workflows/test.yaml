@@ -15,5 +15,9 @@ jobs:
         uses: ./
       - name: Check binaries
         run: |
+          echo "----> ls ."
+          ls .
+          echo "----> ls semver"
+          ls semver
           echo -n "semver: "
           semver --version
