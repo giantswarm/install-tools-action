@@ -8,12 +8,14 @@ async function run() {
       const version = core.getInput('architect');
       const url = `https://github.com/giantswarm/architect/releases/download/v${version}/architect-v${version}-linux-amd64.tar.gz`
       installTool('architect', version, url, 1, '*/architect')
+      await exec.exec(`architect version`)
     })
 
     await = core.group('Install semver', async () => {
       const version = core.getInput('semver');
       const url = `https://github.com/fsaintjacques/semver-tool/archive/${version}.tar.gz`
       installTool('semver', version, url, 2, '*/src/semver')
+      await exec.exec(`semver --version`)
     })
   } catch (error) {
     core.setFailed(error.message);
