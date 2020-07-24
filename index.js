@@ -5,10 +5,11 @@ const tc = require('@actions/tool-cache');
 
 async function run() {
   try {
-    core.info('Install architect')
-    const architectVersion = core.getInput('architect');
-    const architectDownloadURL = `https://github.com/giantswarm/architect/releases/download/v${architectVersion}/architect-v${architectVersion}-linux-amd64.tar.gz`
-    await installTool('architect', architectVersion, architectDownloadURL, 1, '*/architect')
+    core.group('Install architect', async () => {
+      const architectVersion = core.getInput('architect');
+      const architectDownloadURL = `https://github.com/giantswarm/architect/releases/download/v${architectVersion}/architect-v${architectVersion}-linux-amd64.tar.gz`
+      await installTool('architect', architectVersion, architectDownloadURL, 1, '*/architect')
+    })
 
     core.info('Install semver')
     const semverVersion = core.getInput('semver');
