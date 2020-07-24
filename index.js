@@ -11,7 +11,7 @@ async function run() {
       await exec.exec(`architect version`)
     })
 
-    await = core.group('Install semver', async () => {
+    await core.group('Install semver', async () => {
       const version = core.getInput('semver');
       const url = `https://github.com/fsaintjacques/semver-tool/archive/${version}.tar.gz`
       installTool('semver', version, url, 2, '*/src/semver')
