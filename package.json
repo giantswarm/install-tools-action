@@ -1,28 +1,24 @@
 {
   "name": "my-js-action",
-  "version": "1.0.0",
-  "description": "Installs tools.",
+  "version": "0.1.0",
+  "description": "My JavaScript GitHub action.",
   "main": "index.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "echo \"No tests\" && exit 0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kopiczko/my-js-action.git"
   },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/kopiczko/my-js-action/issues"
   },
   "homepage": "https://github.com/kopiczko/my-js-action#readme",
   "dependencies": {
-    "@actions/core": "^1.1.0",
+    "@actions/core": "^1.2.4",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^1.1.0",
-    "@actions/glob": "^0.1.0",
-    "@actions/io": "^1.0.2",
-    "@actions/tool-cache": "^1.1.0"
+    "@actions/tool-cache": "^1.6.0"
   }
 }

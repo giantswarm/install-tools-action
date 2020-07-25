@@ -23,7 +23,7 @@ async function run() {
 }
 
 async function installTool(name, version, url, stripComponents, wildcard) {
-  var cachedPath = tc.find(name, version)
+  let cachedPath = tc.find(name, version)
   if (cachedPath) {
       core.addPath(cachedPath)
       return

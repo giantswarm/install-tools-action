@@ -3,7 +3,7 @@ lint:
 
 deps:
 	npm install @actions/core
-	npm install @actions/github
+	npm install @actions/exec
 	npm install @actions/tool-cache
 
 init:
