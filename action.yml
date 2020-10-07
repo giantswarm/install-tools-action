@@ -1,11 +1,11 @@
 name: 'Install Tools'
 description: 'Install & cache common scripts and binaries.'
 inputs:
-  architect:
+  architect_version:
     description: 'giantswarm/architect version'
     required: false
     default: '2.1.0'
-  semver:
+  semver_version:
     description: 'fsaintjacques/semver-tool version'
     required: false
     default: '3.0.0'

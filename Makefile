@@ -1,5 +1,5 @@
 lint:
-	NODE_OPTIONS="--trace-warnings" ./node_modules/.bin/eslint --ext .js ./index.js
+	NODE_OPTIONS="--no-warnings" ./node_modules/.bin/eslint --ext .js ./index.js
 
 deps:
 	npm install @actions/core

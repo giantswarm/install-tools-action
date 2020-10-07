@@ -5,14 +5,14 @@ const tc = require('@actions/tool-cache');
 async function run() {
   try {
     await core.group('Install architect', async () => {
-      const version = core.getInput('architect');
+      const version = core.getInput('architect_version');
       const url = `https://github.com/giantswarm/architect/releases/download/v${version}/architect-v${version}-linux-amd64.tar.gz`
       await installTool('architect', version, url, 1, '*/architect')
       await exec.exec(`architect version`)
     })
 
     await core.group('Install semver', async () => {
-      const version = core.getInput('semver');
+      const version = core.getInput('semver_version');
       const url = `https://github.com/fsaintjacques/semver-tool/archive/${version}.tar.gz`
       await installTool('semver', version, url, 2, '*/src/semver')
       await exec.exec(`semver --version`)
