@@ -4,11 +4,11 @@ inputs:
   architect_version:
     description: 'giantswarm/architect version'
     required: false
-    default: '3.0.0'
+    default: '3.0.3'
   devctl_version:
     description: 'giantswarm/devctl version'
     required: false
-    default: '1.0.0'
+    default: '2.0.0'
   semver_version:
     description: 'fsaintjacques/semver-tool version'
     required: false
