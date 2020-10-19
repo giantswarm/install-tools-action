@@ -9,6 +9,8 @@ async function run() {
       new Function("return `" + s + "`;").call()
     }
 
+core.info("***** Hello!")
+
     let binary = core.getInput('binary');
     let version = core.getInput('version');
     let downloadURL = core.getInput('download_url');
