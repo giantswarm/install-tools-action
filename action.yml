@@ -1,18 +1,24 @@
-name: 'Install Tools'
+name: 'Install Tool'
 description: 'Install & cache common scripts and binaries.'
 inputs:
-  architect_version:
-    description: 'giantswarm/architect version'
+  binary:
+    description: 'Name of the binary. E.g. "architect"'
+    required: true
+  version:
+    description: 'Version. E.g. "architect"'
+    required: true
+  download_url:
+    description: 'Download URL template. Available variables are ${binary} and ${version}.'
     required: false
-    default: '3.0.4'
-  devctl_version:
-    description: 'giantswarm/devctl version'
+    default: 'https://github.com/giantswarm/${binary}/releases/download/v${version}/${binary}-v${version}-linux-amd64.tar.gz'
+  tarball_binary_path:
+    description: 'Template of the binary path in the tarball. Can contain wildcards.'
     required: false
-    default: '2.0.1'
-  semver_version:
-    description: 'fsaintjacques/semver-tool version'
+    default: '*/${binary}'
+  smoke_test:
+    description: 'Template of the binary smoke test.'
     required: false
-    default: '3.0.0'
+    default: '${binary} version'
 outputs: {}
 runs:
   using: 'node12'
