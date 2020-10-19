@@ -11,14 +11,13 @@ async function run() {
     let tarballBinaryPath = core.getInput('tarball_binary_path');
     let smokeTest = core.getInput('smoke_test');
 
-    const fillTemplate = function(s) {
+    const fillTemplate = function(s, binary, version) {
       new Function("return `" + s + "`;").call()
     }
 
-    version = fillTemplate(version)
-    downloadURL = fillTemplate(downloadURL)
-    tarballBinaryPath = fillTemplate(tarballBinaryPath)
-    smokeTest = fillTemplate(smokeTest)
+    downloadURL = fillTemplate(downloadURL, binary, version)
+    tarballBinaryPath = fillTemplate(tarballBinaryPath, binary, version)
+    smokeTest = fillTemplate(smokeTest, binary, version)
 
     const stripComponents = tarballBinaryPath.split("/").length - 1
 
