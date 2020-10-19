@@ -12,20 +12,17 @@ async function run() {
     let smokeTest = core.getInput('smoke_test');
 
     const fillTemplate = function(s) {
-      new Function("return `" + s + "`;").call({
-        binary: binary,
-        version: version,
-      })
+      new Function('binary', 'version', "return `" + s + "`;").call(binary, version);
     }
 
-    downloadURL = fillTemplate(downloadURL)
+    downloadURL = fillTemplate(downloadURL);
     tarballBinaryPath = fillTemplate(tarballBinaryPath)
-    smokeTest = fillTemplate(smokeTest)
+    smokeTest = fillTemplate(smokeTest);
 
-    const stripComponents = tarballBinaryPath.split("/").length - 1
+    const stripComponents = tarballBinaryPath.split("/").length - 1;
 
-    await installTool(binary, version, downloadURL, stripComponents, tarballBinaryPath)
-    await exec.exec(smokeTest)
+    await installTool(binary, version, downloadURL, stripComponents, tarballBinaryPath);
+    await exec.exec(smokeTest);
   } catch (error) {
     core.setFailed(error.message);
   }
