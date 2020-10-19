@@ -19,6 +19,10 @@ async function run() {
     tarballBinaryPath = fillTemplate(tarballBinaryPath)
     smokeTest = fillTemplate(smokeTest);
 
+    core.info(`donwload URL:         ${downloadURL}`)
+    core.info(`tarball binary path:  ${tarballBinaryPath}`)
+    core.info(`smoke test:           ${smokeTest}`)
+
     const stripComponents = tarballBinaryPath.split("/").length - 1;
 
     await installTool(binary, version, downloadURL, stripComponents, tarballBinaryPath);
