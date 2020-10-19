@@ -12,8 +12,8 @@ async function run() {
     let smokeTest = core.getInput('smoke_test');
 
     const fillTemplate = function(s) {
-      s = s.replaceAll('${binary}', binary)
-      s = s.replaceAll('${verion}', version)
+      s = s.replace(/\$\{binary\}/g, binary)
+      s = s.replace(/\$\{verion\}/g, version)
       return s
     }
 
