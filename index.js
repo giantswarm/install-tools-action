@@ -5,17 +5,15 @@ const tc = require('@actions/tool-cache');
 async function run() {
 
   try {
-    const fillTemplate = function(s) {
-      new Function("return `" + s + "`;").call()
-    }
-
     let binary = core.getInput('binary');
     let version = core.getInput('version');
     let downloadURL = core.getInput('download_url');
     let tarballBinaryPath = core.getInput('tarball_binary_path');
     let smokeTest = core.getInput('smoke_test');
 
-core.info("***** Hello! v2")
+    const fillTemplate = function(s) {
+      new Function("return `" + s + "`;").call()
+    }
 
     version = fillTemplate(version)
     downloadURL = fillTemplate(downloadURL)
