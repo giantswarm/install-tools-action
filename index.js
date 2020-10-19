@@ -12,7 +12,9 @@ async function run() {
     let smokeTest = core.getInput('smoke_test');
 
     const fillTemplate = function(s) {
-      return new Function('binary', 'version', "return `" + s + "`;").call(binary, version);
+      s = s.replaceAll('${binary}', binary)
+      s = s.replaceAll('${verion}', version)
+      return s
     }
 
     downloadURL = fillTemplate(downloadURL);
