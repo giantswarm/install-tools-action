@@ -13,7 +13,7 @@ async function run() {
 
     const fillTemplate = function(s) {
       s = s.replace(/\$\{binary\}/g, binary)
-      s = s.replace(/\$\{verion\}/g, version)
+      s = s.replace(/\$\{version\}/g, version)
       return s
     }
 
