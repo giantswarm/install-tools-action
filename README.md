@@ -1,5 +1,7 @@
 # install-tools-action
 
+⚠️ ⚠️ ⚠️ This action is deprecated. Use [install-binary-action](https://github.com/giantswarm/install-binary-action) instead. ⚠️ ⚠️ ⚠️
+
 This action installs binaries used in Giant Swarm workflows. To see what tools
 are installed check `*_version` inputs defined in [action.yml](./action.yml).
 
