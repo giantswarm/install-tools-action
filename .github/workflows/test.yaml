@@ -13,10 +13,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: "12"
       - name: Checkout code
         uses: actions/checkout@v2-beta
       - name: Lint
         run: "npm run lint"
-      - name: Test this action
+      - name: Test downloading Giant Swarm binary
         uses: ./
+        with:
+          binary: "devctl"
+          version: "2.0.0"
+      - name: Test downloading external binary
+        uses: ./
+        with:
+          binary: "semver"
+          version: "3.0.0"
+          download_url: "https://github.com/fsaintjacques/${binary}-tool/archive/${version}.tar.gz"
+          tarball_binary_path: "*/src/${binary}"
+          smoke_test: "${binary} --version"

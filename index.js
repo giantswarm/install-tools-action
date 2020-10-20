@@ -3,27 +3,32 @@ const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
 
 async function run() {
+
   try {
-    await core.group('Install architect', async () => {
-      const version = core.getInput('architect_version');
-      const url = `https://github.com/giantswarm/architect/releases/download/v${version}/architect-v${version}-linux-amd64.tar.gz`
-      await installTool('architect', version, url, 1, '*/architect')
-      await exec.exec(`architect version`)
-    })
+    let binary = core.getInput('binary');
+    let version = core.getInput('version');
+    let downloadURL = core.getInput('download_url');
+    let tarballBinaryPath = core.getInput('tarball_binary_path');
+    let smokeTest = core.getInput('smoke_test');
 
-    await core.group('Install devctl', async () => {
-      const version = core.getInput('devctl_version');
-      const url = `https://github.com/giantswarm/devctl/releases/download/v${version}/devctl-v${version}-linux-amd64.tar.gz`
-      await installTool('devctl', version, url, 1, '*/devctl')
-      await exec.exec(`devctl version`)
-    })
+    const fillTemplate = function(s) {
+      s = s.replace(/\$\{binary\}/g, binary)
+      s = s.replace(/\$\{version\}/g, version)
+      return s
+    }
 
-    await core.group('Install semver', async () => {
-      const version = core.getInput('semver_version');
-      const url = `https://github.com/fsaintjacques/semver-tool/archive/${version}.tar.gz`
-      await installTool('semver', version, url, 2, '*/src/semver')
-      await exec.exec(`semver --version`)
-    })
+    downloadURL = fillTemplate(downloadURL);
+    tarballBinaryPath = fillTemplate(tarballBinaryPath)
+    smokeTest = fillTemplate(smokeTest);
+
+    core.info(`donwload URL:         ${downloadURL}`)
+    core.info(`tarball binary path:  ${tarballBinaryPath}`)
+    core.info(`smoke test:           ${smokeTest}`)
+
+    const stripComponents = tarballBinaryPath.split("/").length - 1;
+
+    await installTool(binary, version, downloadURL, stripComponents, tarballBinaryPath);
+    await exec.exec(smokeTest);
   } catch (error) {
     core.setFailed(error.message);
   }
